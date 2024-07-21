@@ -2,7 +2,7 @@ import re
 
 phone_regex_pattern = re.compile(
     r"""(
-        (\d{3}|\(\d{3}\))?                 # area code
+        (\d{3}|\(\d{3}\))?                  # area code
         (\s|-|\.)?                          # seperator
         (\d{3})                             # first 3 digits
         (\s|-|\.)                           # seperator
