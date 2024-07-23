@@ -1,4 +1,4 @@
-from __init__ import MAX_GUESSES, NUM_DIGITS, getClues, getSecretNum
+from functions import MAX_GUESSES, NUM_DIGITS, getClues, getSecretNum
 
 print(
     f"""Bagels, a deductive logic game.
