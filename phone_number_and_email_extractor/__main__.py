@@ -1,5 +1,5 @@
 import pyperclip
-from __init__ import extract_emails, extract_phone_numbers
+from functions import extract_emails, extract_phone_numbers
 
 text = str(pyperclip.paste())
 matches = extract_phone_numbers(text).extend(extract_emails(text))

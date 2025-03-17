@@ -1,6 +1,6 @@
 import unittest
 
-from __init__ import NUM_DIGITS, getSecretNum
+from functions import NUM_DIGITS, getSecretNum
 
 
 class TestFunctions(unittest.TestCase):

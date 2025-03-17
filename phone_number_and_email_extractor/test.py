@@ -1,6 +1,6 @@
 import unittest
 
-from __init__ import phone_pattern
+from functions import phone_pattern
 
 
 class TestPhoneRegex(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from __init__ import calculate
+from functions import calculate
 
 
 # TODO: add more tests
