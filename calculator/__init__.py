@@ -8,9 +8,9 @@ def _is_operation(token: str):
     return token in "+-*/^"
 
 
-def eval_math_expression(expression: str):
+def calculate(expression: str):
     postfix_expression = parse_to_postfix_expression(expression)
-    return find_math_result(postfix_expression)
+    return _get_result(postfix_expression)
 
 
 def parse_to_postfix_expression(expression: str):
@@ -88,7 +88,7 @@ def _get_precedence(char: str):
             return -1
 
 
-def find_math_result(postfix_expression: str):
+def _get_result(postfix_expression: str):
     stack = deque()
 
     expression = postfix_expression.split(sep=_sep)
@@ -121,9 +121,3 @@ def _calculate(lhs: int | float, rhs: int | float, operation: str):
             return lhs**rhs
         case default:
             raise Exception("Invalid operator")
-
-
-if __name__ == "__main__":
-    print(
-        find_math_result(parse_to_postfix_expression(" 3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
-    )
