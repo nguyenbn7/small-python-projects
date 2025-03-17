@@ -3,7 +3,7 @@ import threading
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askdirectory, askopenfilenames
-from tkinter.messagebox import showerror
+from tkinter.messagebox import showerror, showinfo
 
 from functions import convert_all_to_png
 
@@ -75,17 +75,18 @@ class JPEGToPNGWindow(Toplevel):
                 "Folder not found", "Please choose a folder to save an image"
             )
 
-        self.convert_btn["text"] = "Converting..."
+        threading.Thread(target=self.background_task).start()
+
         self.convert_btn["state"] = "disabled"
 
-        thread = threading.Thread(
-            target=convert_all_to_png, args=(self.filenames, self.dest_folder)
-        )
-        thread.start()
-        thread.join()
+    def background_task(self):
+        self.convert_btn["text"] = "Converting..."
 
-        self.convert_btn["text"] = "Convert"
+        convert_all_to_png(self.filenames, self.dest_folder)
+
         self.convert_btn["state"] = "normal"
+        self.convert_btn["text"] = "Convert"
+        showinfo("Success", "All Images have been converted to PNG")
 
     def destroy(self) -> None:
         super().destroy()

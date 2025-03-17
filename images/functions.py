@@ -7,16 +7,21 @@ from typing import List
 
 from PIL import Image
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
 
 
 def convert_to_png(
     jpeg_image: str | bytes | PathLike, dest_folder: str | bytes | PathLike
 ):
-    image_name = splitext(basename(jpeg_image))[0]
-    img = Image.open(jpeg_image)
-    img.save(Path(dest_folder).joinpath(f"{image_name}.png"), format="png")
-    logging.debug(f"saved file {image_name}.png")
+    try:
+        image_name = splitext(basename(jpeg_image))[0]
+        img = Image.open(jpeg_image)
+        img.save(Path(dest_folder).joinpath(f"{image_name}.png"), format="png")
+        logging.debug(f"saved file {image_name}.png")
+    except Exception as e:
+        logging.debug(e)
+    finally:
+        img.close()
 
 
 def convert_all_to_png(
