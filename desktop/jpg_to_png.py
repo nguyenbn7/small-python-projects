@@ -1,4 +1,5 @@
 import asyncio
+import threading
 from tkinter import Tk, ttk
 from tkinter.filedialog import askdirectory, askopenfile
 from tkinter.messagebox import showerror
@@ -41,7 +42,10 @@ def convert():
     if dest is None:
         return showerror("Path not found", "Please choose a path to save an image")
 
-    asyncio.run(convert_to_png(source, dest))
+    th = threading.Thread(target=convert_to_png, args=(source, dest))
+    th.start()
+    th.join()
+    print(th.is_alive())
 
 
 main_frame = ttk.Frame(window, padding=10)
@@ -61,6 +65,7 @@ ttk.Button(main_frame, text="where to save", command=save_file_selection).grid(
     column=0, row=1, pady=20
 )
 
-ttk.Button(main_frame, text="convert", command=convert).grid(column=0, row=2, pady=20)
+convert_button = ttk.Button(main_frame, text="convert", command=convert)
+convert_button.grid(column=0, row=2, pady=20)
 
 window.mainloop()
