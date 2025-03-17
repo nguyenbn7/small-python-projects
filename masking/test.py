@@ -1,6 +1,6 @@
 import unittest
 
-from credit_card_masking.main import mask_credit_card
+from __init__ import mask_credit_card
 
 
 class TestMaskingCreditCard(unittest.TestCase):

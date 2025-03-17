@@ -1,7 +1,5 @@
 import re
 
-import pyperclip
-
 phone_pattern = re.compile(
     r"""(
         (\d{3}|\(\d{3}\))?                  # area code
@@ -14,6 +12,19 @@ phone_pattern = re.compile(
     re.VERBOSE,
 )
 
+
+def extract_phone_numbers(text: str):
+    matches = []
+
+    for groups in phone_pattern.findall(text):
+        phoneNum = "-".join([groups[1], groups[3], groups[5]])
+        if groups[8] != "":
+            phoneNum += " x" + groups[8]
+        matches.append(phoneNum)
+
+    return matches
+
+
 email_pattern = re.compile(
     r"""(
     [a-zA-Z0-9._%+-]+               # username
@@ -24,22 +35,6 @@ email_pattern = re.compile(
     re.VERBOSE,
 )
 
-text = str(pyperclip.paste())
 
-matches = []
-
-for groups in phone_pattern.findall(text):
-    phoneNum = "-".join([groups[1], groups[3], groups[5]])
-    if groups[8] != "":
-        phoneNum += " x" + groups[8]
-    matches.append(phoneNum)
-
-for groups in email_pattern.findall(text):
-    matches.append(groups[0])
-
-if len(matches) > 0:
-    pyperclip.copy("\n".join(matches))
-    print("Copied to clipboard:")
-    print("\n".join(matches))
-else:
-    print("No phone numbers or email addresses found.")
+def extract_emails(text: str):
+    return [groups[0] for groups in email_pattern.findall(text)]

@@ -1,7 +1,6 @@
-import re
 import unittest
 
-from phone_and_email_extractor.main import phone_pattern
+from __init__ import phone_pattern
 
 
 class TestPhoneRegex(unittest.TestCase):
