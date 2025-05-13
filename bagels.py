@@ -7,6 +7,7 @@ Tags: short, game, puzzle
 """
 
 import random
+import sys
 
 NUM_DIGITS = 3
 MAX_GUESSES = 10
@@ -82,4 +83,7 @@ For example, if the secret number was 248 and your guess was 843, the clues woul
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(130)
