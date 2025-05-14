@@ -1,3 +1,4 @@
+#! python3
 """Birthday Paradox Simulation
 Explore the surprising probabilities of the "Birthday Paradox".
 More info at https://en.wikipedia.org/wiki/Birthday_problem
